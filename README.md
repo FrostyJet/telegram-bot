@@ -1,4 +1,4 @@
-# telegram-bot
+# Telegram bot (golang)
 
 A basic example of a telegram bot answering questions with commands.
 It searches in wikipedia about different subjects and gives a brief
