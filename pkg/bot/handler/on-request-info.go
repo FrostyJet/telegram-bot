@@ -37,7 +37,7 @@ func (h *Handler) OnRequestInfo(m *tb.Message) {
 	}
 
 	if quote.Description != "" {
-		response = "This is what I found about " + m.Payload + ": " + quote.Description
+		response = "This is what I found about <b>" + m.Payload + "<b>\n\n" + quote.Description
 	} else {
 		response = "Sorry, I couldn't find any information about " + m.Payload
 	}

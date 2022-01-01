@@ -28,7 +28,12 @@ func DownloadContent(url string, as string) {
 
 	log.Println("Downloaded content from: ", url)
 
-	file, err := os.Create("html/" + as + ".html")
+	basePath, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
+	file, err := os.Create(basePath + "/html/" + as + ".html")
 
 	if err != nil {
 		panic(err)
@@ -47,7 +52,12 @@ func DownloadContent(url string, as string) {
 
 func ParseFile(fileName string) string {
 	var description string
-	path := "html/" + fileName + ".html"
+
+	basePath, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	path := basePath + "/html/" + fileName + ".html"
 
 	file, err := os.Open(path)
 

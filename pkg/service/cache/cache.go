@@ -7,6 +7,8 @@ import (
 	"github.com/frostyjet/telegram-bot/entities"
 )
 
+const cachePath = "resources/cache.json"
+
 type Cache struct {
 	data map[string]entities.Quote
 }
@@ -28,11 +30,25 @@ func (c *Cache) Get(query string) (entities.Quote, bool) {
 }
 
 func (c *Cache) Load() {
-	storageContents, _ := os.ReadFile("resources/cache.json")
+	basePath, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
+	storageContents, err := os.ReadFile(basePath + "/" + cachePath)
+	if err != nil {
+		panic(err)
+	}
+
 	json.Unmarshal(storageContents, &c.data)
 }
 
 func (c *Cache) Persist() {
+	basePath, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
 	storageContents, _ := json.Marshal(c.data)
-	os.WriteFile("resources/cache.json", storageContents, 0644)
+	os.WriteFile(basePath+"/"+cachePath, storageContents, 0644)
 }
